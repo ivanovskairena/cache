@@ -39,6 +39,8 @@ store(key, value, ttl \\ 3600)
 
 Add new or update existing value with its ttl in the cache under key.
 
+## Testing 
+
 # Cache.Weather
 Cache.Weather provides utility functions that are available for emulating the cache operation as part of the test coverage.
 
@@ -47,14 +49,17 @@ We are going to use two terminals. Run the following lines in the cache project 
 
 ## First Terminal
 input: /cache$ iex --sname server@localhost -S mix
+
 output: Erlang/OTP...
 
 ## Second Terminal
 input: /cache$ iex --sname client@localhost -S mix
+
 output: Erlang/OTP...
 
 ## Second Terminal: connect to :server@localhost
 input: iex(client@localhost)2> Node.connect(:server@localhost)
+
 output: true
 
 ## First Terminal
