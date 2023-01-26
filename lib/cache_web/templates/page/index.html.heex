@@ -1,0 +1,35 @@
+
+  <div class="text-center bg-gray-50 text-gray-800 py-20 px-6">
+      <h1 class="text-5xl font-medium mb-4">Welcome to <span class="text-teal-500">Cache module</span>!</h1>
+      <h3 class="text-3xl font-bold mb-8">Periodic Self-Rehydrating Cache</h3>
+    </div>
+   
+<section class="bg-white py-8">
+  <div class="container mx-auto">
+    <h2 class="text-2xl font-medium mb-4">Cache</h2>
+    <p class="text-lg mb-4">Cache is an implementation of a periodic self-rehydrating TTL cache that resiliently handles expensive data-processing ahead of time for fast access.</p>
+    <p class="text-lg mb-4">The cache mechanism generates 0-arity functions that embed inbound data from store/3. Each function is registered under a unique key along with a TTL("time to live"). Child processes are assigned to compute the functions at set intervals and store the results. The cache is expected to provide the most recently computed value whenever get/1 is called.</p>
+    <h3 class="text-xl font-medium mb-4">Feature</h3>
+    <ul class="text-lg mb-4">
+      <li>Critical tasks are executed concurrently ensuring quality performance without race conditions.</li>
+      <li>Child processes are free from their parent. Instead, they are linked to a chain of supervisors to the main application-- ensuring application-wide stability with data-processing workers resilient to runtime exceptions.</li>
+      <li>Storage is optimized for concurrent read/write.</li>
+    </ul>
+    <h3 class="text-xl font-medium mb-4">Use Case</h3>
+    <ul class="text-lg mb-4">
+      <li>Input data is high-frequency fast-changing queries.</li>
+      <li>Data requires processing that is expensive to compute, therefore, data processing must start and be completed before it is needed, not when it is being requested for.</li>
+      <li>Data is not frequently accessed, but fast access is guaranteed when needed.</li>
+    </ul>
+    <h3 class="text-xl font-medium mb-4">Test-Run Utility</h3>
+         <p class="text-gray-700 mt-2">See 
+         <a class="inline-block  text-teal-500 font-medium text-700   hover:shadow-lg  focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="light" href="weather" >Cache.Weather</a>
+          </p>
+          <br/>
+       <h3 class="text-xl font-medium mb-4">Functions</h3>
+      <p class="text-teal-700 mt-2">get(key)</p>
+      <p>get/1 Retrieve the value for a specified key from the cache.</p>
+      <p class="text-teal-700 mt-2">store(key, value, ttl \\ 3600)</p>
+      <p>Add new or update existing value with its ttl in the cache under key.</p> 
+    </div>
+</section>

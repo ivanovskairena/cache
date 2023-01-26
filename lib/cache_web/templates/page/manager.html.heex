@@ -1,0 +1,22 @@
+<section class="bg-white py-8">
+  <div class="container mx-auto">
+    <h2 class="text-2xl font-medium mb-4">Manager</h2>
+    <p class="text-lg mb-4"> This is a module called Cache.Manager which is an implementation of a GenServer that manages the creation, updating, and retrieval of data in a cache. The module defines several functions such as start_link/1, init/1, andle_call/3, handle_info/2, and worker_pid/1.</p>
+    <h3 class="text-xl font-medium mb-4">Functions</h3>
+      <p class="text-teal-700 mt-2">start_link/1 </p>
+      <p>start_link/1 function is used to start the GenServer process and it returns the process ID of the newly created process.</p>
+      <p class="text-teal-700 mt-2">init/1</p>
+      <p>init/1 function is used to initialize the state of the GenServer.</p> 
+      <p class="text-teal-700 mt-2">handle_call/3 </p>
+      <p>handle_call/3 function is used to handle the call messages that the GenServer receives.</p> 
+      <p class="text-teal-700 mt-2">handle_info/2 </p>
+      <p>handle_info/2 function is used to handle the info messages that the GenServer receives,such as results from the async tasks. worker_pid/1 is a helper function used for debugging purposes, it returns the process ID of a specific worker process in the cache.</p> 
+        <br>   
+     <p class="text-sm mb-2">The GenServer uses the Task.Supervisor to start async tasks to update or create data in the cache and to terminate worker processes when their TTL expires. The Store and Weather modules are also used in the GenServer.
+        Store is used to interact with an ETS table that stores the data in the cache and Weather is used to generate 0-arity functions that are used to store data in the cache. The module also uses Logger to log events happening in the cache.
+        </p>
+    </div>
+</section>
+ 
+
+ 

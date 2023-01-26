@@ -1,0 +1,34 @@
+<section class="bg-white py-8">
+  <div class="container mx-auto">
+    <h2 class="text-2xl font-medium mb-4">Worker</h2>
+    <p class="text-sm mb-4">This is a module called Cache.Worker which is an implementation of a GenServer that manages the processing of data in the cache. 
+    <br>The module defines several functions such as start_link/1, init/1, handle_continue/2, handle_info/2, and terminate/2.</p>
+ 
+    <p class="text-sm mb-2"> start_link/1 function is used to start the GenServer process and it returns the process ID of the newly created process. init/1 function is used to initialize the state of the GenServer.
+        <br> The GenServer uses the Process.send_after/3 function to send :compute message to itself after a certain time interval and handle_continue/2 function is used to handle the continue messages that the GenServer receives. handle_info/2 function is used to handle the info messages that the GenServer receives, such as :compute message. terminate/2 function is used to handle the termination of the GenServer process and it sends a message to the manager process to terminate the supervisor process for this worker. <br> The function uses the Store module to interact with an ETS table that stores the data in the cache and Logger to log events happening in the cache. The GenServer uses several helper functions like parity?/3, ttl_expired?/1, compute_function/1 and worker_name/1 to check if the number of refresh intervals corresponds to the TTL, if the TTL has expired, to perform the computation on the data stored in cache and to generate the name of the worker process respectively.
+        <br>TTL is expected to be a multiple of the Refresh Interval. That is, if: refresh_interval = 600_000, ttl = 3_600_000, div(ttl, refresh_interval ) == 6 then TTL check will occur after 6 refresh interval cycles. 
+        <br>This timing strategy enables the process to use only a single counter for both the Refresh Interval and the TTL.
+    </p> 
+        <br>   
+     <p class="text-sm mb-2">The GenServer uses the Task.Supervisor to start async tasks to update or create data in the cache and to terminate worker processes when their TTL expires. The Store and Weather modules are also used in the GenServer.
+        Store is used to interact with an ETS table that stores the data in the cache and Weather is used to generate 0-arity functions that are used to store data in the cache. The module also uses Logger to log events happening in the cache.
+        </p>
+    </div>
+  <div class="container mx-auto">
+   <h2 class="text-2xl font-medium mb-4">Functionality:</h2>
+ 
+   <p class="text-teal-700 mt-2">handle_continue({:setup, config}) one-time configuration that sets up the initial timestamp for the TTL and Refresh Interval.
+   <br> The Cache.Worker detects new updates by comparing timestamps at certain intervals. </p>
+
+   <p class="text-teal-700 mt-2">handle_continue(:timer, config) runs the timer for the refresh interval.
+   <br> The timer is set to the refresh_interval value stored in a global :pesistent_term. All worker processes created use the same internal value.</p>
+
+   <p class="text-teal-700 mt-2"> handle_info(:compute, config) computes the 0-arity function and stores its value in the ETS.
+   <br>  This callback also performs data update checks and TTL checks. If no new data is available and the TTL check returns false, no computation is done, instead, the process is routed to</p>
+   <p class="text-teal-700 mt-2"> handle_continue(:timer, config) for another run. If TTL returns true, the stale data object is deleted from the ETS and a shutdown signal is sent to 'Cache.Manager' to terminate the expired process from a DynamicSupervisor.</p>
+  </div>
+</section>
+ 
+
+ 
+

@@ -1,0 +1,64 @@
+ 
+<section class="bg-white py-8">
+  <div class="container mx-auto">
+   <h2 class="text-2xl font-medium mb-4"> Cache.Weather</h2>
+     <p class="text-sm mb-4">Cache.Weather provides utility functions that are available for emulating the cache operation as part of the test coverage.
+    </p>
+    <h2 class="text-2xl font-medium mb-4">Example</h2>
+    <p class="text-sm mb-4">
+      We are going to use two terminals.
+      Run the following lines in the cache project directory:
+    </p>
+    <p class="text-sm text-teal-500  mb-4">
+        ## First Terminal <br>
+        input: /cache$ iex  --sname server@localhost -S mix <br>
+        output: Erlang/OTP...
+    </p>
+    <p class="text-sm text-blue-800  mb-4">
+        ## Second Terminal <br>
+        input: /cache$ iex --sname client@localhost -S mix <br>
+        output: Erlang/OTP...
+    </p>
+    <p class="text-sm text-blue-800  mb-4">
+        ## Second Terminal: connect to :server@localhost <br>
+        input: iex(client@localhost)2> Node.connect(:server@localhost)<br>
+        output: true
+    </p>
+    <p class="text-sm text-teal-500  mb-4">
+        ## First Terminal <br>
+        iex(server@localhost)1> Cache.Weather.loop_store()
+    </p>
+    <p class="text-sm text-blue-800  mb-4">
+         ## Second Terminal <br>
+        iex(client@localhost)2> Node.spawn(:server@localhost, Cache.Weather, :loop_get, [])
+    </p>
+    </div>
+</section>
+<hr>
+<section class="bg-white py-8">
+  <div class="container mx-auto">
+        <h2 class="text-2xl font-medium mb-4">
+        Summary</h2>
+        <h3 class="text-xl font-medium mb-4">Functions</h3>
+        <p class="text-sm mb-4">
+             <p class="text-teal-500 mt-2">generate_0_arity_fun(value)</p>
+        generate_0_arity_fun/1 generates a 0-arity function that embeds value which is to be computed at a later time. <br> The 0-arity mimics an expensive data processing that takes a range of 2 - 4 seconds to complete. <br> Result is designed to return {:ok, data} or {:error, reason}, or raise/1 as part of the test.
+        </p>
+        <p class="text-sm mb-4">
+         <p class="text-teal-500 mt-2">loop_get()</p>
+        loop_get/0 calls Cache.get/1 in a recursive loop that mimics infrequent data retrieval. <br> It runs every 6 seconds and takes a random key as an argument on every call.
+        </p>
+        <p class="text-sm mb-4">
+        <p class="text-teal-500 mt-2">loop_get_single()</p>
+        loop_get_single/0 same as loop_get/0 but takes the same key as argument on every call.
+        </p>
+        <p class="text-sm mb-4">
+        <p class="text-teal-500 mt-2">loop_store()</p>
+        loop_store/0 calls Cache.store/3 in a recursive loop that mimics periodic fast data queries. <br> It runs every second, takes random keys/value that represents weather data by cities, and generated TTL in the range of 30 - 60 seconds as arguments on every call.
+        </p>
+        <p class="text-sm mb-4">
+        <p class="text-teal-500 mt-2">single_loop_store()</p>
+        loop_store_single/0 same as loop_store/0 but takes a single key/value as argument on every call.
+        </p>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
+    <%= live_title_tag assigns[:page_title] || "Cache", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+  </head>
+  <body>
+  <header  >
+    <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
+        <div class="px-6 w-full flex flex-wrap items-center justify-between">
+        
+          <div class="navbar-collapse  items-center " >
+            <ul class="navbar-nav mr-auto lg:flex lg:flex-row">
+              <li class="nav-item">
+                <a class="nav-link block pr-2 lg:px-2 py-2 text-black-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="/" data-mdb-ripple="true" data-mdb-ripple-color="light">Cache</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link blocktext-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="weather" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                <button class="bg-teal-500  pr-2 lg:px-2 py-2  hover:bg-teal-700 text-white font-bold  rounded"> Cache.Weather</button></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="worker" data-mdb-ripple="true" data-mdb-ripple-color="light">Cache.Worker</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="worker_visor" data-mdb-ripple="true" data-mdb-ripple-color="light">Cache.Worker_visor</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="manager" data-mdb-ripple="true" data-mdb-ripple-color="light">Cache.Manager</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="store" data-mdb-ripple="true" data-mdb-ripple-color="light">Cache.Store</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- Navbar -->   
+  
+  </header>
+     
+    <%= @inner_content %>
+    
+  </body>
+</html>
