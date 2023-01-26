@@ -47,23 +47,23 @@ Cache.Weather provides utility functions that are available for emulating the ca
 # Example
 We are going to use two terminals. Run the following lines in the cache project directory:
 
-## First Terminal
+# First Terminal
 input: /cache$ iex --sname server@localhost -S mix
 
 output: Erlang/OTP...
 
-## Second Terminal
+# Second Terminal
 input: /cache$ iex --sname client@localhost -S mix
 
 output: Erlang/OTP...
 
-## Second Terminal: connect to :server@localhost
+# Second Terminal: connect to :server@localhost
 input: iex(client@localhost)2> Node.connect(:server@localhost)
 
 output: true
 
-## First Terminal
+# First Terminal
 iex(server@localhost)1> Cache.Weather.loop_store()
 
-## Second Terminal
+# Second Terminal
 iex(client@localhost)2> Node.spawn(:server@localhost, Cache.Weather, :loop_get, [])
